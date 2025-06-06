@@ -1,0 +1,7 @@
+{
+  "name": "BAK--App-Ionic",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
