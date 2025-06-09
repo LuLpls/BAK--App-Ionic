@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ listName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of unpurchasedItems()">
+      <ion-item>
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p *ngIf="item.quantity || item.unit">{{ item.quantity }} {{ item.unit }}</p>
+        </ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="item.purchased" (ionChange)="togglePurchased(item)"></ion-checkbox>
+        <ion-button fill="clear" slot="end" size="small" color="medium" (click)="editItem(item); $event.stopPropagation()">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteItem(item)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <div *ngIf="purchasedItems().length > 0" class="gap"></div>
+
+    <ion-item-sliding *ngFor="let item of purchasedItems()">
+      <ion-item class="purchased">
+        <ion-label>
+          <h2>{{ item.name }}</h2>
+          <p *ngIf="item.quantity || item.unit">{{ item.quantity }} {{ item.unit }}</p>
+        </ion-label>
+        <ion-checkbox slot="end" [(ngModel)]="item.purchased" (ionChange)="togglePurchased(item)"></ion-checkbox>
+        <ion-button fill="clear" slot="end" size="small" color="medium" (click)="editItem(item); $event.stopPropagation()">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="deleteItem(item)">
+          <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end" style="bottom: calc(var(--ion-safe-area-bottom, 0px) + 16px); right: 16px;">
+    <ion-fab-button (click)="addItem()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>  
+</ion-content>

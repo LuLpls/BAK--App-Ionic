@@ -1,0 +1,10 @@
+.purchased {
+  --color: var(--ion-color-medium);
+
+  ion-label {
+    text-decoration: line-through;
+  }
+}
+.gap {
+  height: 24px;
+}
