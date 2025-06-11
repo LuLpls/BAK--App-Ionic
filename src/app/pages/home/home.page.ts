@@ -3,12 +3,12 @@ import { IonicModule, AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
-import { TranslateService, TranslateModule } from '@ngx-translate/core'; // Překladač + Modul
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [IonicModule, CommonModule, TranslateModule], // << přidáno TranslateModule
+  imports: [IonicModule, CommonModule, TranslateModule],
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
@@ -19,7 +19,7 @@ export class HomePage implements OnInit {
   constructor(
     private alertController: AlertController,
     private router: Router,
-    private translate: TranslateService // << Překladač přidaný do constructoru
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -49,7 +49,7 @@ export class HomePage implements OnInit {
           type: 'text',
           placeholder: this.translate.instant('home.namePlaceholder'),
           attributes: {
-            maxlength: 50  // Limit na 50 znaků
+            maxlength: 50
           }
         }
       ],
@@ -62,10 +62,10 @@ export class HomePage implements OnInit {
           text: this.translate.instant('home.addListButton'),
           handler: async (data) => {
             if (data.name.trim().length === 0) {
-              return false; // Prázdný název
+              return false;
             }
             if (data.name.length > 50) {
-              return false; // Přesáhne délku
+              return false;
             }
             const newList = {
               id: Math.random().toString(),

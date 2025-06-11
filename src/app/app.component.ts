@@ -16,7 +16,6 @@ export class AppComponent implements OnInit {
   constructor(private translate: TranslateService) {}
 
   async ngOnInit() {
-    console.log('AppComponent initialized');
     await this.setupTheme();
     await this.setupLanguage();
   }
@@ -45,10 +44,8 @@ export class AppComponent implements OnInit {
     const { value } = await Preferences.get({ key: 'selectedLanguage' });
 
     if (value) {
-      // Uložený jazyk existuje
       this.translate.use(value);
     } else {
-      // Pokud není uložený jazyk, nastavíme výchozí EN
       const defaultLang = 'en';
       this.translate.setDefaultLang(defaultLang);
       this.translate.use(defaultLang);
