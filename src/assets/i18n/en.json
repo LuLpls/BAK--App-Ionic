@@ -10,31 +10,32 @@
       "newNamePlaceholder": "New List Name"
     },
     "list": {
-        "addItem": "Add Item",
-        "editItem": "Edit Item",
-        "namePlaceholder": "Item Name",
-        "quantityPlaceholder": "Quantity (number)",
-        "unitPlaceholder": "Unit",
-        "addButton": "Add"
+      "addItem": "Add Item",
+      "editItem": "Edit Item",
+      "namePlaceholder": "Item Name",
+      "quantityPlaceholder": "Quantity (number)",
+      "unitPlaceholder": "Unit",
+      "addButton": "Add"
     },
     "settings": {
-        "title": "Settings",
-        "darkMode": "Dark Mode",
-        "language": "Language",
-        "selectLanguage": "Select Language"
+      "title": "Settings",
+      "darkMode": "Dark Mode",
+      "language": "Language",
+      "selectLanguage": "Select Language"
     },
     "validation": {
-        "invalidName": "Invalid name. Please enter a valid name (max 30 characters).",
-        "invalidQuantity": "Invalid quantity. Please enter a positive number.",
-        "invalidUnit": "Invalid unit. Max 10 characters allowed."
+      "invalidName": "Invalid name. Please enter a valid name (max 30 characters).",
+      "duplicateName": "This item already exists in the list.",
+      "invalidQuantity": "Invalid quantity. Please enter a positive number.",
+      "invalidUnit": "Invalid unit. Max 10 characters allowed."
     },
     "common": {
-        "cancel": "Cancel",
-        "save": "Save",
-        "no": "No",
-        "yesDelete": "Yes, Delete",
-        "error": "Error",
-        "ok": "OK"
+      "cancel": "Cancel",
+      "save": "Save",
+      "no": "No",
+      "yesDelete": "Yes, Delete",
+      "error": "Error",
+      "ok": "OK"
     }
-}
+  }
   

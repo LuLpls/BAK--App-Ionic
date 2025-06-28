@@ -15,7 +15,7 @@
           <h2>{{ item.name }}</h2>
           <p *ngIf="item.quantity || item.unit">{{ item.quantity }} {{ item.unit }}</p>
         </ion-label>
-        <ion-checkbox slot="end" [(ngModel)]="item.purchased" (ionChange)="togglePurchased(item)"></ion-checkbox>
+        <ion-checkbox slot="start" [(ngModel)]="item.purchased" (ionChange)="togglePurchased(item)"></ion-checkbox>
         <ion-button fill="clear" slot="end" size="small" color="medium" (click)="editItem(item); $event.stopPropagation()">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>
@@ -35,7 +35,7 @@
           <h2>{{ item.name }}</h2>
           <p *ngIf="item.quantity || item.unit">{{ item.quantity }} {{ item.unit }}</p>
         </ion-label>
-        <ion-checkbox slot="end" [(ngModel)]="item.purchased" (ionChange)="togglePurchased(item)"></ion-checkbox>
+        <ion-checkbox slot="start" [(ngModel)]="item.purchased" (ionChange)="togglePurchased(item)"></ion-checkbox>
         <ion-button fill="clear" slot="end" size="small" color="medium" (click)="editItem(item); $event.stopPropagation()">
           <ion-icon name="create-outline"></ion-icon>
         </ion-button>

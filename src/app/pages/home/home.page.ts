@@ -48,9 +48,7 @@ export class HomePage implements OnInit {
           name: 'name',
           type: 'text',
           placeholder: this.translate.instant('home.namePlaceholder'),
-          attributes: {
-            maxlength: 50
-          }
+          attributes: { maxlength: 50 }
         }
       ],
       buttons: [
@@ -61,15 +59,16 @@ export class HomePage implements OnInit {
         {
           text: this.translate.instant('home.addListButton'),
           handler: async (data) => {
-            if (data.name.trim().length === 0) {
+            const name = data.name?.trim();
+            const error = this.validateListName(name);
+            if (error) {
+              await this.showValidationError(error);
               return false;
             }
-            if (data.name.length > 50) {
-              return false;
-            }
+
             const newList = {
               id: Math.random().toString(),
-              name: data.name,
+              name: name,
             };
             this.shoppingLists.push(newList);
             await this.saveLists();
@@ -78,10 +77,10 @@ export class HomePage implements OnInit {
         },
       ],
     });
-  
+
     await alert.present();
   }
-  
+
   async editList(list: { id: string; name: string }) {
     const alert = await this.alertController.create({
       header: this.translate.instant('home.editList'),
@@ -91,9 +90,7 @@ export class HomePage implements OnInit {
           type: 'text',
           value: list.name,
           placeholder: this.translate.instant('home.namePlaceholder'),
-          attributes: {
-            maxlength: 50
-          }
+          attributes: { maxlength: 50 }
         }
       ],
       buttons: [
@@ -104,19 +101,46 @@ export class HomePage implements OnInit {
         {
           text: this.translate.instant('common.save'),
           handler: async (data) => {
-            if (data.name.trim().length === 0 || data.name.length > 50) {
+            const name = data.name?.trim();
+            const error = this.validateListName(name);
+            if (error) {
+              await this.showValidationError(error);
               return false;
             }
-            list.name = data.name;
+
+            list.name = name;
             await this.saveLists();
             return true;
           },
         },
       ],
     });
-  
+
     await alert.present();
-  }  
+  }
+
+  validateListName(name: string): string | null {
+    if (!name || name.trim().length === 0 || name.length > 50) {
+      return this.translate.instant('validation.invalidName');
+    }
+    return null;
+  }
+  
+
+  async showValidationError(message: string) {
+    const alert = await this.alertController.create({
+      header: this.translate.instant('common.error'),
+      message: message,
+      buttons: [
+        {
+          text: this.translate.instant('common.ok'),
+          role: 'cancel',
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 
   async deleteList(listId: string) {
     const alert = await this.alertController.create({

@@ -1,40 +1,40 @@
 {
-    "home": {
-      "title": "Seznamy",
-      "addList": "Přidat nový seznam",
-      "addListButton": "Přidat seznam",
-      "editList": "Upravit seznam",
-      "deleteListHeader": "Smazat seznam?",
-      "deleteListMessage": "Opravdu chcete tento seznam smazat?",
-      "namePlaceholder": "Název seznamu",
-      "newNamePlaceholder": "Nový název seznamu"
-    },
-    "list": {
-        "addItem": "Přidat položku",
-        "editItem": "Upravit položku",
-        "namePlaceholder": "Název položky",
-        "quantityPlaceholder": "Množství (číslo)",
-        "unitPlaceholder": "Jednotka",
-        "addButton": "Přidat"
-    },
-    "settings": {
-      "title": "Nastavení",
-      "darkMode": "Tmavý režim",
-      "language": "Jazyk",
-      "selectLanguage": "Vyberte jazyk"
-    },
-    "validation": {
-        "invalidName": "Neplatný název. Zadejte platný název (max. 30 znaků).",
-        "invalidQuantity": "Neplatné množství. Zadejte kladné číslo.",
-        "invalidUnit": "Neplatná jednotka. Maximálně 10 znaků."
-    },
-    "common": {
-        "cancel": "Zrušit",
-        "save": "Uložit",
-        "no": "Ne",
-        "yesDelete": "Ano, smazat",
-        "error": "Chyba",
-        "ok": "OK"
-    }
+  "home": {
+    "title": "Seznamy",
+    "addList": "Přidat nový seznam",
+    "addListButton": "Přidat seznam",
+    "editList": "Upravit seznam",
+    "deleteListHeader": "Smazat seznam?",
+    "deleteListMessage": "Opravdu chcete tento seznam smazat?",
+    "namePlaceholder": "Název seznamu",
+    "newNamePlaceholder": "Nový název seznamu"
+  },
+  "list": {
+    "addItem": "Přidat položku",
+    "editItem": "Upravit položku",
+    "namePlaceholder": "Název položky",
+    "quantityPlaceholder": "Množství (číslo)",
+    "unitPlaceholder": "Jednotka",
+    "addButton": "Přidat"
+  },
+  "settings": {
+    "title": "Nastavení",
+    "darkMode": "Tmavý režim",
+    "language": "Jazyk",
+    "selectLanguage": "Vyberte jazyk"
+  },
+  "validation": {
+    "invalidName": "Neplatný název. Zadejte platný název (max. 30 znaků).",
+    "duplicateName": "Tato položka už v seznamu existuje.",
+    "invalidQuantity": "Neplatné množství. Zadejte kladné číslo.",
+    "invalidUnit": "Neplatná jednotka. Maximálně 10 znaků."
+  },
+  "common": {
+    "cancel": "Zrušit",
+    "save": "Uložit",
+    "no": "Ne",
+    "yesDelete": "Ano, smazat",
+    "error": "Chyba",
+    "ok": "OK"
   }
-  
+}

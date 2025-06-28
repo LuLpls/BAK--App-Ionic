@@ -65,25 +65,19 @@ export class ListPage implements OnInit {
           name: 'name',
           type: 'text',
           placeholder: this.translate.instant('list.namePlaceholder'),
-          attributes: {
-            maxlength: 30
-          }
+          attributes: { maxlength: 30 }
         },
         {
           name: 'quantity',
           type: 'text',
           placeholder: this.translate.instant('list.quantityPlaceholder'),
-          attributes: {
-            maxlength: 10
-          }
+          attributes: { maxlength: 10 }
         },
         {
           name: 'unit',
           type: 'text',
           placeholder: this.translate.instant('list.unitPlaceholder'),
-          attributes: {
-            maxlength: 10
-          }
+          attributes: { maxlength: 10 }
         }
       ],
       buttons: [
@@ -94,23 +88,17 @@ export class ListPage implements OnInit {
         {
           text: this.translate.instant('list.addButton'),
           handler: async (data) => {
-            if (data.name.trim().length === 0 || data.name.length > 30) {
-              await this.showValidationError(this.translate.instant('validation.invalidName'));
+            const error = this.validateItemInput(data, false);
+            if (error) {
+              await this.showValidationError(error);
               return false;
             }
-            if (data.quantity && (isNaN(Number(data.quantity)) || Number(data.quantity) <= 0)) {
-              await this.showValidationError(this.translate.instant('validation.invalidQuantity'));
-              return false;
-            }
-            if (data.unit && data.unit.length > 10) {
-              await this.showValidationError(this.translate.instant('validation.invalidUnit'));
-              return false;
-            }
+
             const newItem = {
               id: Math.random().toString(),
-              name: data.name,
-              quantity: data.quantity,
-              unit: data.unit,
+              name: data.name.trim(),
+              quantity: data.quantity?.trim(),
+              unit: data.unit?.trim(),
               purchased: false,
             };
             this.items.push(newItem);
@@ -121,9 +109,9 @@ export class ListPage implements OnInit {
         },
       ],
     });
-  
+
     await alert.present();
-  }  
+  }
 
   async editItem(item: any) {
     const alert = await this.alertController.create({
@@ -134,27 +122,21 @@ export class ListPage implements OnInit {
           type: 'text',
           value: item.name,
           placeholder: this.translate.instant('list.namePlaceholder'),
-          attributes: {
-            maxlength: 30
-          }
+          attributes: { maxlength: 30 }
         },
         {
           name: 'quantity',
           type: 'text',
           value: item.quantity,
           placeholder: this.translate.instant('list.quantityPlaceholder'),
-          attributes: {
-            maxlength: 10
-          }
+          attributes: { maxlength: 10 }
         },
         {
           name: 'unit',
           type: 'text',
           value: item.unit,
           placeholder: this.translate.instant('list.unitPlaceholder'),
-          attributes: {
-            maxlength: 10
-          }
+          attributes: { maxlength: 10 }
         }
       ],
       buttons: [
@@ -165,21 +147,15 @@ export class ListPage implements OnInit {
         {
           text: this.translate.instant('common.save'),
           handler: async (data) => {
-            if (data.name.trim().length === 0 || data.name.length > 30) {
-              await this.showValidationError(this.translate.instant('validation.invalidName'));
+            const error = this.validateItemInput(data, true, item.id);
+            if (error) {
+              await this.showValidationError(error);
               return false;
             }
-            if (data.quantity && (isNaN(Number(data.quantity)) || Number(data.quantity) <= 0)) {
-              await this.showValidationError(this.translate.instant('validation.invalidQuantity'));
-              return false;
-            }
-            if (data.unit && data.unit.length > 10) {
-              await this.showValidationError(this.translate.instant('validation.invalidUnit'));
-              return false;
-            }
-            item.name = data.name;
-            item.quantity = data.quantity;
-            item.unit = data.unit;
+
+            item.name = data.name.trim();
+            item.quantity = data.quantity?.trim();
+            item.unit = data.unit?.trim();
             this.sortItems();
             this.saveItems();
             return true;
@@ -187,9 +163,38 @@ export class ListPage implements OnInit {
         },
       ],
     });
-  
+
     await alert.present();
-  }  
+  }
+
+  validateItemInput(data: any, isEdit = false, currentItemId?: string): string | null {
+    const name = data.name?.trim();
+    const quantity = data.quantity?.trim();
+    const unit = data.unit?.trim();
+
+    if (!name || name.length === 0 || name.length > 30) {
+      return this.translate.instant('validation.invalidName');
+    }
+
+    const duplicate = this.items.find(item =>
+      item.name.trim().toLowerCase() === name.toLowerCase() &&
+      (!isEdit || item.id !== currentItemId)
+    );
+
+    if (duplicate) {
+      return this.translate.instant('validation.duplicateName');
+    }
+
+    if (quantity && (isNaN(Number(quantity)) || Number(quantity) <= 0)) {
+      return this.translate.instant('validation.invalidQuantity');
+    }
+
+    if (unit && unit.length > 10) {
+      return this.translate.instant('validation.invalidUnit');
+    }
+
+    return null;
+  }
 
   async togglePurchased(item: any) {
     this.sortItems();
@@ -227,5 +232,4 @@ export class ListPage implements OnInit {
     });
     await alert.present();
   }
-  
 }
