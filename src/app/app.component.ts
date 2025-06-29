@@ -46,9 +46,13 @@ export class AppComponent implements OnInit {
     if (value) {
       this.translate.use(value);
     } else {
-      const defaultLang = 'en';
+      const browserLang = navigator.language.split('-')[0];
+      const supportedLangs = ['en', 'cs'];
+      const defaultLang = supportedLangs.includes(browserLang) ? browserLang : 'en';
+
       this.translate.setDefaultLang(defaultLang);
       this.translate.use(defaultLang);
+
       await Preferences.set({ key: 'selectedLanguage', value: defaultLang });
     }
   }

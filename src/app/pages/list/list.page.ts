@@ -88,6 +88,8 @@ export class ListPage implements OnInit {
         {
           text: this.translate.instant('list.addButton'),
           handler: async (data) => {
+            const start = performance.now();
+
             const error = this.validateItemInput(data, false);
             if (error) {
               await this.showValidationError(error);
@@ -104,6 +106,10 @@ export class ListPage implements OnInit {
             this.items.push(newItem);
             this.sortItems();
             this.saveItems();
+
+            const end = performance.now();
+            console.log(`[PERF] addItem took ${Math.round(end - start)} ms`);
+
             return true;
           },
         },
@@ -147,6 +153,8 @@ export class ListPage implements OnInit {
         {
           text: this.translate.instant('common.save'),
           handler: async (data) => {
+            const start = performance.now();
+
             const error = this.validateItemInput(data, true, item.id);
             if (error) {
               await this.showValidationError(error);
@@ -158,6 +166,10 @@ export class ListPage implements OnInit {
             item.unit = data.unit?.trim();
             this.sortItems();
             this.saveItems();
+
+            const end = performance.now();
+            console.log(`[PERF] editItem took ${Math.round(end - start)} ms`);
+
             return true;
           },
         },
@@ -202,9 +214,15 @@ export class ListPage implements OnInit {
   }
 
   async deleteItem(item: any) {
+    const start = performance.now();
+
     this.items = this.items.filter(i => i.id !== item.id);
     this.sortItems();
     await this.saveItems();
+
+    const end = performance.now();
+    console.log(`[PERF] deleteItem took ${Math.round(end - start)} ms`);
+
   }
 
   sortItems() {

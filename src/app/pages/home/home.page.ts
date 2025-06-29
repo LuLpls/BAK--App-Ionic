@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IonicModule, AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Preferences } from '@capacitor/preferences';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 
@@ -23,7 +23,11 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadLists();
+    const start = performance.now();
+    this.loadLists().then(() => {
+      const end = performance.now();
+      console.log(`[PERF] HomePage loaded in ${Math.round(end - start)} ms`);
+    });
   }
 
   async loadLists() {
