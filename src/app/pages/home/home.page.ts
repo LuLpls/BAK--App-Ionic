@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { IonicModule, AlertController } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
@@ -12,7 +12,7 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, AfterViewInit {
   shoppingLists: { id: string; name: string }[] = [];
   private readonly STORAGE_KEY = 'shoppingLists';
 
@@ -23,11 +23,15 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    const start = performance.now();
-    this.loadLists().then(() => {
-      const end = performance.now();
-      console.log(`[PERF] HomePage loaded in ${Math.round(end - start)} ms`);
-    });
+    this.loadLists();
+  }
+
+  ngAfterViewInit() {
+    const renderEnd = performance.now();
+    const startupTime = renderEnd - (window as any).appStart;
+    setTimeout(() => {
+      console.log(`[PERF] Full app startup time: ${startupTime.toFixed(2)} ms`);
+    }, 6000); 
   }
 
   async loadLists() {
@@ -129,7 +133,6 @@ export class HomePage implements OnInit {
     }
     return null;
   }
-  
 
   async showValidationError(message: string) {
     const alert = await this.alertController.create({
