@@ -88,7 +88,7 @@ export class ListPage implements OnInit {
         {
           text: this.translate.instant('list.addButton'),
           handler: async (data) => {
-            const start = performance.now();
+            const start = performance.now(); // performance test starting
 
             const error = this.validateItemInput(data, false);
             if (error) {
@@ -107,7 +107,7 @@ export class ListPage implements OnInit {
             this.sortItems();
             this.saveItems();
 
-            const end = performance.now();
+            const end = performance.now(); // performance test ending
             console.log(`[PERF] addItem took ${Math.round(end - start)} ms`);
 
             return true;
@@ -128,7 +128,7 @@ export class ListPage implements OnInit {
           type: 'text',
           value: item.name,
           placeholder: this.translate.instant('list.namePlaceholder'),
-          attributes: { maxlength: 30 }
+          attributes: { maxlength: 20 }
         },
         {
           name: 'quantity',
@@ -153,7 +153,7 @@ export class ListPage implements OnInit {
         {
           text: this.translate.instant('common.save'),
           handler: async (data) => {
-            const start = performance.now();
+            const start = performance.now(); // performance test starting
 
             const error = this.validateItemInput(data, true, item.id);
             if (error) {
@@ -167,7 +167,7 @@ export class ListPage implements OnInit {
             this.sortItems();
             this.saveItems();
 
-            const end = performance.now();
+            const end = performance.now(); // performance test ending
             console.log(`[PERF] editItem took ${Math.round(end - start)} ms`);
 
             return true;
@@ -188,13 +188,8 @@ export class ListPage implements OnInit {
       return this.translate.instant('validation.invalidName');
     }
 
-    const duplicate = this.items.find(item =>
-      item.name.trim().toLowerCase() === name.toLowerCase() &&
-      (!isEdit || item.id !== currentItemId)
-    );
-
-    if (duplicate) {
-      return this.translate.instant('validation.duplicateName');
+    if (quantity && quantity.length > 10) {
+      return this.translate.instant('validation.invalidQuantity');
     }
 
     if (quantity && (isNaN(Number(quantity)) || Number(quantity) <= 0)) {
@@ -214,13 +209,13 @@ export class ListPage implements OnInit {
   }
 
   async deleteItem(item: any) {
-    const start = performance.now();
+    const start = performance.now(); // performance test starting
 
     this.items = this.items.filter(i => i.id !== item.id);
     this.sortItems();
     await this.saveItems();
 
-    const end = performance.now();
+    const end = performance.now(); // performance test ending
     console.log(`[PERF] deleteItem took ${Math.round(end - start)} ms`);
 
   }

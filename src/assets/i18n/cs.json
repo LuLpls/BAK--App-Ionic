@@ -24,9 +24,9 @@
     "selectLanguage": "Vyberte jazyk"
   },
   "validation": {
-    "invalidName": "Neplatný název. Zadejte platný název (max. 30 znaků).",
+    "invalidName": "Neplatný název. Maximálně 30 znaků.",
     "duplicateName": "Tato položka už v seznamu existuje.",
-    "invalidQuantity": "Neplatné množství. Zadejte kladné číslo.",
+    "invalidQuantity": "Neplatné množství. Zadejte kladné číslo (max 10 znaků)",
     "invalidUnit": "Neplatná jednotka. Maximálně 10 znaků."
   },
   "common": {

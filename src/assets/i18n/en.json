@@ -24,9 +24,9 @@
       "selectLanguage": "Select Language"
     },
     "validation": {
-      "invalidName": "Invalid name. Please enter a valid name (max 30 characters).",
+      "invalidName": "Invalid name. Max 30 characters.",
       "duplicateName": "This item already exists in the list.",
-      "invalidQuantity": "Invalid quantity. Please enter a positive number.",
+      "invalidQuantity": "Invalid quantity. Please enter a positive number. (max 10 characters)",
       "invalidUnit": "Invalid unit. Max 10 characters allowed."
     },
     "common": {

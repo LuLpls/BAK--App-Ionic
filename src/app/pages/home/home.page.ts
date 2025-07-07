@@ -27,7 +27,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    const renderEnd = performance.now();
+    const renderEnd = performance.now(); // performance test ending, starting is in index.html
     const startupTime = renderEnd - (window as any).appStart;
     setTimeout(() => {
       console.log(`[PERF] Full app startup time: ${startupTime.toFixed(2)} ms`);
@@ -56,7 +56,7 @@ export class HomePage implements OnInit, AfterViewInit {
           name: 'name',
           type: 'text',
           placeholder: this.translate.instant('home.namePlaceholder'),
-          attributes: { maxlength: 50 }
+          attributes: { maxlength: 30 }
         }
       ],
       buttons: [
@@ -98,7 +98,7 @@ export class HomePage implements OnInit, AfterViewInit {
           type: 'text',
           value: list.name,
           placeholder: this.translate.instant('home.namePlaceholder'),
-          attributes: { maxlength: 50 }
+          attributes: { maxlength: 30 }
         }
       ],
       buttons: [
@@ -128,7 +128,7 @@ export class HomePage implements OnInit, AfterViewInit {
   }
 
   validateListName(name: string): string | null {
-    if (!name || name.trim().length === 0 || name.length > 50) {
+    if (!name || name.trim().length === 0 || name.length > 30) {
       return this.translate.instant('validation.invalidName');
     }
     return null;

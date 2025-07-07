@@ -41,7 +41,7 @@ export class SettingsPage implements OnInit {
   }
 
   async toggleDarkMode(event: any) {
-    const start = performance.now();
+    const start = performance.now(); // performance test starting
 
     const isChecked = event.detail.checked;
     this.isDarkMode = isChecked;
@@ -57,19 +57,19 @@ export class SettingsPage implements OnInit {
       document.documentElement.classList.remove('ion-palette-dark');
     }
 
-    const end = performance.now();
+    const end = performance.now(); // performance test ending
     console.log(`[PERF] toggleDarkMode took ${Math.round(end - start)} ms`);
   }
 
   async changeLanguage(lang: string) {
-    const start = performance.now();
+    const start = performance.now(); // performance test starting
 
 
     this.selectedLanguage = lang;
     this.translate.use(lang);
     await Preferences.set({ key: 'selectedLanguage', value: lang });
 
-    const end = performance.now();
+    const end = performance.now(); // performance test ending
     console.log(`[PERF] changeLanguage took ${Math.round(end - start)} ms`);
   }
 }
